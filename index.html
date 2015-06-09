@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="drugLord" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Drug Lord 2</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app.css">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body  ng-controller="gameController">
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+    <div id="container" class="container">
+        <div class="information col-md-12">
+            <h4 class="heading">Information</h4><hr>
+        </div>
+        
+        <div class="market col-md-4">
+            <h4 class="heading">Market</h4><hr>
+            <ul class="list-group" ng-cloak>
+                <li ng-click="selectedDrug($event,$index)" align="center" class="list-group-item" ng-show="start" ng-repeat="drug in drugs track by $index"><span class="drug-name">{{drug.name}}</span> <span align="center" >{{drug.price | currency}}</span><span class="badge">{{drug.qty}}</span></li>
+            </ul>
+        </div>
+        
+        <div class="action col-md-4">
+            <h4 class="heading">Action</h4><hr>
+            <button class="btn btn-primary col-xs-5" ng-click="buyDrug()">Buy >></button>
+            <div class="col-xs-2"></div>
+            <button class="btn btn-primary col-xs-5" ng-click="sellDrug()"> << Sell</button><br><br>
+            <button class="btn btn-primary col-xs-5" ng-click="dumpDrug()">Dump</button>
+            <div class="col-xs-2"></div>
+                <div class="dropdown" style="display:inline;">
+                 <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown"> Places
+                <span class="caret"> </span> </button>
+                 <ul class="dropdown-menu " role="menu">
+                    <li><a href="#" data-toggle="modal" data-target="#myModal" >Finances</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#myModal1">Shopping</a></li>
+                    <li><a href="#">Hospital</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#myModal2">Vault   </a></li>
+                    <li><a href="#">Shipping</a></li> 
+                </ul> 
+                </div><br><br>
+             <div class="dropdown" style="display:inline;">
+                 <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown"> Info
+                <span class="caret"> </span> </button>
+                 <ul class="dropdown-menu ">
+                    <li><a href="#">Vaults           </a></li>
+                    <li><a href="#">World drug price </a></li>
+                    <li><a href="#">World cities     </a></li>
+                    <li><a href="#">Shipping satus    </a></li> 
+                </ul> 
+                </div>
+        </div>
+
+
+        
+        <div class="pocket col-md-4">
+            <h4 class="heading">Pocket Size ({{pocketSize}})</h4><hr>
+            <ul class="list-group">
+                <li ng-click="selectedDrugWareHouse($event,$index)" align="center" class="list-group-item" ng-if="start" ng-repeat="whdrug in whdrugs track by $index">
+                    <span class="drug-name" align="center">{{whdrug.name}}</span> 
+                    <span align="center" class="cost">{{whdrug.price | currency}}</span>
+                    <span class="badge">{{whdrug.qty}}</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="tomorrow col-md-4">
+            <h4 class="heading">Tomorrow</h4><hr>
+            <button class="btn btn-primary col-xs-5" ng-click="stayHere()">Stay Here</button>
+            <div class="col-xs-2"></div>
+            <button class="btn btn-primary col-xs-5" ng-click="flyAway()">Fly Away</button>
+        </div>
+        
+        <div class="status col-md-4">
+            <h4 class="heading">Status</h4><hr>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Name</label>
+                    <input class="form-control col-sm-8" type="text" placeholder={{playerName}} disabled>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Cash</label>
+               <input class="form-control col-sm-8" type="text" placeholder={{playerCash|currency}} disabled>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Bank </label>
+                   <input class="form-control col-sm-8" type="text" placeholder={{playerBank|currency}} disabled> 
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Debt</label>
+                 <input class="form-control col-sm-8" type="text" placeholder={{playerDebt|currency}} disabled>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Health</label>
+                     <input class="form-control col-sm-8" type="text" placeholder={{playerHealth}} disabled> 
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Rank</label>
+                    <input class="form-control col-sm-8" type="text" placeholder={{playerRank}} disabled> 
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Days</label>
+                    <input class="form-control col-sm-8" type="text" placeholder={{playerDays+"/"+playerDaysLeft}} disabled>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">City</label>
+                    <input class="form-control col-sm-8" type="text" placeholder={{playerCity}} disabled> 
+                </div>
+            </div>
+        </div>
+        
+        <div class="game col-md-4">
+            <h4 class="heading">Game</h4><hr>
+            <button id="start" class="btn btn-success col-xs-5" ng-click="startNewGame()">New Game</button>
+            <div class="col-xs-2"></div>
+            <button id="quit" ng-show="quitButton" class="btn btn-danger col-xs-5" ng-click="endGame()">Quit</button>
+        </div>
+        
+
+
+        <!-- Finance Modal -->
+     <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-content" id="mymodal_content">
+              <div class="modal-dialog">
+                <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" id="myModalLabel">Finance</h3>
+                </div>
+                    <div class="modal-body">
+                           <h4 align="left">Bank</h4><hr>
+                           <div class="form-inline ">
+                                 <div class="control-group col-sm-6">
+                                   <label for="cash"> <p class="text-info">Cash :&nbsp</p> </label>
+                                   <input type="text"class="form-control" type="text" id="cash "placeholder={{playerCash|currency}} disabled>
+                                 </div>
+                                 <div class="control-group col-sm-6">  
+                                     <label  for="bank"> <p class="text-info"> Bank :&nbsp</p></label>
+                                     <input type="text" class="form-control "  id="bank" type="text" placeholder={{playerBank|currency}} disabled>
+                                 </div> 
+                                 <div class="radio col-sm-10" >
+                                    <label class=" radio-inline"><input type="radio" name="operation" value="0">Deposite</label>
+                                    <label class=" radio-inline"><input type="radio" name="operation" value="1">Withdraw</label> 
+                                 </div></br></br>
+                           </div></br>
+                           <div class="form-inline">
+                                <div class="control-group col-sm-8">  
+                                     <label  for="ammount"> <p class="text-info"> Ammount :&nbsp</p></label>
+                                     <input type="text" class="form-control" id="ammount" type="text" >
+                                </div> 
+                                <div class="control-group col-sm-4">  
+                                    <button type="button" class="btn btn-info" ng-click="bankOperation()">Do It!</button>
+                                </div> 
+                           </div></br></br><hr>
+                           <div>
+                                <h4 align ="left">Loan</h4><hr>
+                                <div class="form-inline ">
+                                    <div class="control-group ">
+                                       <label for="loan"> <p class="text-info">Loan Ammount :&nbsp</p> </label>
+                                       <input type="text"class="form-control" type="text" id="loan"placeholder={{playerDebt|currency}} disabled>
+                                    </div></br>
+                                </div>  
+                           </div>
+                       </div></br>
+                       
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="payLone()">Pay Lone</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Shopping modal -->
+      <div id="myModal1" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+         <!-- Modal content-->
+            <div class="modal-content">
+                 <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Shopping</h4>
+                 </div>
+                 <div class="modal-body">
+                      <h5 class="heading">Store's Inventory</h5>
+                      <div id="list-item">
+                        <ul class="list-group" ng-cloak>
+                           <li ng-click="selectedSellInvItem($event,$index)" align="center" class="list-group-item" ng-show="start" ng-repeat="store in storInventory track by $index">
+                            <span class="drug-name">{{store.name}}</span>
+                             <span align="center" >{{store.type  }}</span>
+                             <span class="badge">{{store.price | currency}}</span>
+                           </li>
+                       </ul>
+                     </div></br></br>
+                     <div class="form-inline">
+                         <div class="control-group col-sm-6">
+                                   <label for="cash"> <p class="text-info">Cash :&nbsp</p> </label>
+                                   <input type="text"class="form-control" type="text" id="cash "placeholder={{playerCash|currency}} disabled>
+                         </div>
+                         <div class="control-group col-sm-6">
+                         <button type="button" class="btn btn-info" ng-click="buyInventoryItem()" style="align:right;">Buy</button>
+                         </div>
+                     </div></br></br>
+                     <div>
+                           <h5 class="heading">Your Inventory</h5>
+                           <div id="list-item">
+                              <ul class="list-group" ng-cloak>
+                                   <li ng-click="selectedBuyInvItems($event,$index)" align="center" class="list-group-item" ng-show="start" ng-repeat="store in buyArray track by $index">
+                                    <span class="drug-name">{{store.name}}</span> 
+                                    <span align="center" >{{store.type  }}</span>
+                                    <span class="badge">{{store.price | currency}}</span>
+                                    <span align="right" >{{store.qty  }}</span>
+                                  </li>
+                              </ul>
+                           </div></br>
+                           <div>
+                                 <button type="button" class="btn btn-info" ng-click="sellBuyInvItem()" style="align:right;">Sell</button>  
+                           </div>
+                     </div>
+               </div></br></br>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                 </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Vault Modal -->
+     <div id="myModal2" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+         <!-- Modal content-->
+            <div class="modal-content" style={height:500px;width:700px} >
+                 <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Vaults</h4>
+                 </div>
+                 <div class="modal-body">
+                    <div class="container" id="vault_model">
+                        <div class="col-sm-5" id="inPocket">
+                            tarun
+                         </div>   
+                         <div class="col-sm-2" id="vaultAction">
+                            tarun
+                         </div> 
+                         <div class="col-sm-5" id="inVault">
+                            tarun
+                         </div> 
+                    </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> 
+                 </div>
+            </div>        
+         </div>
+     </div>
+   
+    </div>
+
+    <!-- In production use:-->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="modules/app.js"></script>
+    <script src="modules/city.js"></script>
+    <script src="modules/market.js"></script>
+    <script src="modules/player.js"></script>
+    <script src="modules/random.js"></script>
+    <script src="modules/warehouse.js"></script>
+    <script src="modules/action.js"></script>
+    <script src="modules/place.js"></script>
+    <!--
+        <script src="modules/tomorrow.js"></script>
+    -->
+</body>
+</html>

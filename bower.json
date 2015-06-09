@@ -1,0 +1,17 @@
+{
+  "name": "Drug Lord",
+  "version": "0.0.1",
+  "authors": [
+    "himan999 <himan8nine@gmail.com>"
+  ],
+  "description": "nothing",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,137 @@
+/* app css stylesheet */
+html, body {
+    height : 647px;
+    width : 100%;
+    position: absolute;
+}
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+.information {
+    height:150px;
+    border: 1px solid grey;
+    border-radius: 3px;
+}
+
+.market {
+    height:496px;
+    border: 1px solid grey;
+    overflow: scroll;
+    border-radius: 3px;
+    float: left;
+}
+
+.action {
+    height: 241px;
+    width: 33.6%;
+    display: inline-block;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 0px auto;
+}
+
+.tomorrow {
+    height:127px;
+    width: 33.6%;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 0px auto;
+}
+
+.game {
+    height: 127px;
+    width: 33.6%;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 0px auto;
+}
+
+.pocket {
+    height:217px;
+    width: 33%;
+    border: 1px solid grey;
+    float: right;
+    overflow: scroll;
+}
+
+.status {
+    top : -22px;
+    height: 277px;
+    width: 33%;
+    border: 1px solid grey;
+    border-radius: 3px;
+    float: right;
+    overflow: scroll;
+}
+
+.drug {
+    height:25px;
+    margin: 0px auto;
+}
+
+.drug-name {
+    float:left;
+}
+
+.heading {
+    padding: 0px;
+}
+#list-item{
+  max-height: 100px;
+  overflow-y:scroll;
+}
+#mymodal_content{
+  left:  500px;
+  display:  inline-block;
+}
+
+#inPocket
+{
+  background: blue;
+  height: 275px;
+  border: 1px black solid;
+}
+#vaultAction
+{
+  background: blue;
+  height: 275px;
+  border: 1px black solid;
+}
+#inVault
+{
+  background: blue;
+  height: 275px;
+  border: 1px black solid;
+}
+#vault_model
+{
+  height:600px;
+  width:700px;
+  margin-left: -12px;
+}
