@@ -38,17 +38,19 @@
             <button class="btn btn-primary col-xs-5" ng-click="sellDrug()"> << Sell</button><br><br>
             <button class="btn btn-primary col-xs-5" ng-click="dumpDrug()">Dump</button>
             <div class="col-xs-2"></div>
-                <div class="dropdown" style="display:inline;">
-                 <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown"> Places
-                <span class="caret"> </span> </button>
-                 <ul class="dropdown-menu " role="menu">
-                    <li><a href="#" data-toggle="modal" data-target="#myModal" >Finances</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#myModal1">Shopping</a></li>
-                    <li><a href="#">Hospital</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#myModal2">Vault   </a></li>
-                    <li><a href="#">Shipping</a></li> 
-                </ul> 
-                </div><br><br>
+
+            <div class="dropdown" style="display:inline;">
+             <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown"> Places
+            <span class="caret"> </span> </button>
+             <ul class="dropdown-menu " role="menu">
+                <li><a href="#" data-toggle="modal" data-target="#myModal" >Finances</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#myModal1">Shopping</a></li>
+                <li><a href="#">Hospital</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#myModal2">Vault   </a></li>
+                <li><a href="#">Shipping</a></li> 
+            </ul> 
+            </div><br><br>
+
              <div class="dropdown" style="display:inline;">
                  <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown"> Info
                 <span class="caret"> </span> </button>
@@ -78,7 +80,14 @@
             <h4 class="heading">Tomorrow</h4><hr>
             <button class="btn btn-primary col-xs-5" ng-click="stayHere()">Stay Here</button>
             <div class="col-xs-2"></div>
-            <button class="btn btn-primary col-xs-5" ng-click="flyAway()">Fly Away</button>
+            <div class="dropdown" style="display:inline">
+             <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown" ng-click="flyAway()"> Fly Away
+            <span class="caret"> </span> </button>
+             <ul class="dropdown-menu scrollable-menu" role="menu">
+                <li ng-click="flyToCity($event)" ng-repeat="dest in destinations"><a data-toggle="modal">{{dest}}</a></li> 
+            </ul> 
+            </div>
+
         </div>
         
         <div class="status col-md-4">
@@ -123,7 +132,7 @@
             <h4 class="heading">Game</h4><hr>
             <button id="start" class="btn btn-success col-xs-5" ng-click="startNewGame()">New Game</button>
             <div class="col-xs-2"></div>
-            <button id="quit" ng-show="quitButton" class="btn btn-danger col-xs-5" ng-click="endGame()">Quit</button>
+            <button id="quit" ng-show="start" class="btn btn-danger col-xs-5" ng-click="endGame()">Quit</button>
         </div>
         
 
@@ -275,8 +284,6 @@
     <script src="modules/warehouse.js"></script>
     <script src="modules/action.js"></script>
     <script src="modules/place.js"></script>
-    <!--
-        <script src="modules/tomorrow.js"></script>
-    -->
+    <script src="modules/tomorrow.js"></script>
 </body>
 </html>

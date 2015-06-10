@@ -135,3 +135,9 @@ html, body {
   width:700px;
   margin-left: -12px;
 }
+
+.scrollable-menu {
+    height: auto;
+    max-height: 190px;
+    overflow-x: hidden;
+}

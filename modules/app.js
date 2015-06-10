@@ -2,7 +2,7 @@
 
 var drugLord = angular.module('drugLord',[]);
 
-drugLord.controller('gameController',['$scope','cityService','playerService','actionService','warehouseService',function($scope,cityServ,player,action,ware){
+drugLord.controller('gameController',['$scope','cityService','playerService','actionService','warehouseService','tomorrowService',function($scope,cityServ,player,action,ware,tomm){
 	$scope.start = false;
 
 	$scope.startNewGame = function() {
@@ -12,6 +12,9 @@ drugLord.controller('gameController',['$scope','cityService','playerService','ac
 		$scope.setupPlayer();
 		$scope.setupCityNMarket();
 
+		var startBtn = document.getElementById("start");
+		startBtn.innerHTML = "Restart";
+		startBtn.className = "btn btn-warning col-xs-5";
 
 		$scope.start = true;
 	};
@@ -42,6 +45,12 @@ drugLord.controller('gameController',['$scope','cityService','playerService','ac
 	$scope.whdrugs = ware.whdrugs;
 	$scope.selectedDrugWareHouse = ware.selectedDrugWareHouse;
 
+	$scope.flyAway = function() {
+		$scope.destinations = cityServ.getCityNames();
+	};
+
+	$scope.flyToCity = tomm.flyAway;
+
 	$scope.$watch(function(){
 		return player.cash;
 	},function(newValue){
@@ -49,6 +58,8 @@ drugLord.controller('gameController',['$scope','cityService','playerService','ac
 			$scope.setupPlayer();
 		}
 	});
+
+	
 
 
 	$scope.endGame = function() {

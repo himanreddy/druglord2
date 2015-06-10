@@ -3,14 +3,14 @@
 drugLord.service('cityService',['drugService',function(dcs){
 	var scope = this;
 	scope.cities = ["Austin, USA", "Beijing, China", "Boston, USA", "Detroit, USA", "London, England", "Los Angeles, USA", "Miami, USA", "Moscow, Russia", "New York, USA", "Paris, France", "San Francisco, USA", "St. Peteresburg, Russia", "Sydney, Australia", "Toronto, Canada", "Vancouver, Canada"];
-	scope.cityObjs = [];
 
 	scope.initCities = function() {
 		console.log("initcities");
-		scope.cityObjs = scope.init();
+		scope.init();
 	};
 
 	scope.init = function() {
+		scope.cityObjs = [];
 		for(var i = 0, n = scope.cities.length; i < n; i++) {
 			scope.cityObjs.push(
 				{
@@ -23,6 +23,7 @@ drugLord.service('cityService',['drugService',function(dcs){
 		}
 		console.log(scope.cityObjs);
 		scope.currCity = scope.cityObjs[0];
+		scope.currCity.isHere = true;
 	};
 
 	scope.flyToCity = function(cityName) {
@@ -35,6 +36,22 @@ drugLord.service('cityService',['drugService',function(dcs){
 			};
 			scope.cityObjs[i].isHere = false;
 		}
+	};
+
+	scope.getCityNames = function() {
+			var arr = new Array();
+			for(var i =0, n = scope.cityObjs.length; i < n; i++) {
+				if(scope.cityObjs[i].isHere) {
+					continue;
+				}
+				arr.push(scope.cityObjs[i].name);
+			}
+
+		return arr;
+	};
+
+	scope.getCityObjs = function() {
+		return scope.cityObjs;
 	};
 
 	scope.prevTarget = null;

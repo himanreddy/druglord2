@@ -33,25 +33,14 @@ acScope.sellDrug = function(){
                             acScope.drugs[j].qty= tqty + temp ;
                             play.cash= play.cash + (temp * sellCash);
                        }
-                       /*else if(temp < acScope.whdrugs[i].qty)
-                       {
-                            acScope.whdrugs[i].qty=acScope.whdrugs[i].qty - temp;
-                            acScope.drugs[j].qty= tqty + temp ;
-                            sellCash= pls.cash + (temp * sellCash);
-                            pls.cashUpdate(sellCash);
-
-                          pls.cash += temp*acScope.whdrugs[i].price;
-                          acScope.whdrugs.splice(i,1);
-                          acScope.drugs[j].qty= tqty + temp ;
-                       }*/
-                       else if(temp < acScope.whdrugs[i].qty)
+                       else if(temp > 0 && temp < acScope.whdrugs[i].qty)
                        {
                           console.log("4.2");
                           play.cash += temp*acScope.whdrugs[i].price;
                           acScope.whdrugs[i].qty=acScope.whdrugs[i].qty - temp;
                           acScope.drugs[j].qty= tqty + temp ;
                        }
-                       else if(temp > acScope.whdrugs[i].qty)
+                       else if(temp < 0 || temp > acScope.whdrugs[i].qty)
                        {
                             window.alert("You have only "+acScope.whdrugs[i].qty+"\n Enter valid quantity");
                        }
@@ -73,7 +62,7 @@ for(var i=0;i < acScope.drugs.length;i++)
      {
      	  var temp=0;
            temp=parseInt(window.prompt("You want to buy "+acScope.drugs[i].name+" price of $"+acScope.drugs[i].price+" availabe quantity is "+acScope.drugs[i].qty +"\n enter the quantity you want to buy"));
-           if((temp <= acScope.drugs[i].qty) && temp!=null)
+           if((temp > 0 && temp <= acScope.drugs[i].qty) && temp!=null)
            {
               if (acScope.whdrugs.length >= 1)
                {
@@ -114,7 +103,7 @@ for(var i=0;i < acScope.drugs.length;i++)
                     }
                }
             }
-            else if((temp > acScope.drugs[i].qty) && temp != null)
+            else if((temp < 0 || temp > acScope.drugs[i].qty) && temp != null)
             {
               window.alert("Please specify values within range!");
             }
@@ -150,11 +139,11 @@ acScope.dumpDrug=function(){
                   acScope.whdrugs.splice(i,1);
                }
              
-             else if(temp < acScope.whdrugs[i].qty){
+             else if(temp > 0 && temp < acScope.whdrugs[i].qty){
                   acScope.whdrugs[i].qty = quant - temp;
                }
              
-             else if(temp > acScope.whdrugs[i].qty){
+             else if(temp < 0 || temp > acScope.whdrugs[i].qty){
                   window.alert("You have only "+acScope.whdrugs[i].qty+" quantity"+"\nEnter valid Quantity");
                }
          // sconsole.log(acScope.whdrugs[i]);
