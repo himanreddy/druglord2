@@ -42,6 +42,14 @@ drugLord.controller('gameController',['$scope','cityService','playerService','ac
 	$scope.whdrugs = ware.whdrugs;
 	$scope.selectedDrugWareHouse = ware.selectedDrugWareHouse;
 
+	$scope.$watch(function(){
+		return player.cash;
+	},function(newValue){
+		if($scope.start) {
+			$scope.setupPlayer();
+		}
+	});
+
 
 	$scope.endGame = function() {
         var storage = window.localStorage;

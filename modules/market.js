@@ -170,38 +170,4 @@ drugLord.service('drugService',['randomService','playerService', function(rS,pla
             return array;
         }
 
-
-    mark.prevTarget = null;
-    mark.selectedDrug = function(e,index) {
-        //first mark all selected value to false
-        for(var i=0; i < mark.drugs.length; i++) {
-            mark.drugs[i].selected = false;
-        }
-
-        //mark the selected index drug as true
-        mark.drugs[index].selected = true;
-
-        //if item is selected for the first time
-        if(mark.prevTarget == null) {
-            e.currentTarget.className="list-group-item active";
-            mark.prevTarget = e.currentTarget;
-        } 
-        // if the same item is selected, deselect it and mark selected as false
-        else if(mark.prevTarget == e.currentTarget) {
-            if(e.currentTarget.className == "list-group-item active") {
-                e.currentTarget.className = "list-group-item";
-                mark.drugs[index].selected = false;
-            } else {
-                e.currentTarget.className = "list-group-item active";
-                mark.drugs[index].selected = true;
-            }
-        }
-        //change previous item class and update current one
-        else {
-            mark.prevTarget.className="list-group-item";
-            e.currentTarget.className="list-group-item active";
-            mark.prevTarget = e.currentTarget;
-        }
-    };
-
 }]);
