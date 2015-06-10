@@ -131,6 +131,7 @@ html, body {
   width:700px;
   margin-left: -12px;
 }
+<<<<<<< HEAD
 #vaulthHead{
   background-color: #CACAB0;
   text-align: center;
@@ -163,4 +164,9 @@ html, body {
 #cityDrugs{
     height: 275px;
   border: 1px blue solid;
+}
+.scrollable-menu {
+    height: auto;
+    max-height: 190px;
+    overflow-x: hidden;
 }

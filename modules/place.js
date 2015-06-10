@@ -1,6 +1,6 @@
 'use strict';
 
-drugLord.service('placeService',['playerService','warehouseService','cityService',function(player,whs,citys){
+drugLord.service('placeService',['playerService','warehouseService','cityService',function(player,whs,cityServ){
 	var place=this;
 	place.initInventory=[
 		       {
@@ -88,7 +88,6 @@ drugLord.service('placeService',['playerService','warehouseService','cityService
 		       }
 	];
 	place.buyItems=[];
-  place.vault=[];
 	place.prevTarget = null;
   place.bankOperation = function(){
         var op=document.getElementsByName("operation");
@@ -253,17 +252,17 @@ place.pushInvault=function(){
       var temp=parseInt(window.prompt("You want to put "+whs.whdrugs[i].name+" into vault.\n You have avilable quantity is "+whs.whdrugs[i].qty+"\n Enter the quantity you want to put inside vault"));
       if((temp <= whs.whdrugs[i].qty) && (temp > 0) && (!isNaN(temp)))
       {
-         var flag=check(i,place.vault,whs.whdrugs);
-         if(flag == place.vault.length)
+         var flag=check(i,cityServ.currCity.vault,whs.whdrugs);
+         if(flag == cityServ.currCity.vault.length)
          { 
             if(temp < whs.whdrugs[i].qty)
             {
-               place.vault.push({name:whs.whdrugs[i].name,price:whs.whdrugs[i].price,qty:temp,selected:false,});
+               cityServ.currCity.vault.push({name:whs.whdrugs[i].name,price:whs.whdrugs[i].price,qty:temp,selected:false});
                whs.whdrugs[i].qty-=temp;
             }
             else if(temp == whs.whdrugs[i].qty)
             {
-               place.vault.push({name:whs.whdrugs[i].name,price:whs.whdrugs[i].price,qty:temp,selected:false,});
+               cityServ.currCity.vault.push({name:whs.whdrugs[i].name,price:whs.whdrugs[i].price,qty:temp,selected:false});
                whs.whdrugs.splice(i,1);          
             }
           }
@@ -272,15 +271,16 @@ place.pushInvault=function(){
              
              if(temp < whs.whdrugs[i].qty)
             {
-               place.vault[flag].qty+=temp;
+               cityServ.currCity.vault[flag].qty+=temp;
                whs.whdrugs[i].qty-=temp;
             }
             else if(temp == whs.whdrugs[i].qty)
             {
-              place.vault[flag].qty+=temp;
+              cityServ.currCity.vault[flag].qty+=temp;
                whs.whdrugs.splice(i,1);          
             }
-          }    
+          }
+          cityServ.cityVaultsInfo();    
       }
       else
       {
@@ -304,20 +304,20 @@ place.pushInvault=function(){
   return flag;
 }
 place.selectVaultItems=function(e,index){
-    for(var i=0; i < place.vault.length; i++) {
-            place.vault[i].selected = false;
+    for(var i=0; i < cityServ.currCity.vault.length; i++) {
+            cityServ.currCity.vault[i].selected = false;
         }
-       place.vault[index].selected = true;
+       cityServ.currCity.vault[index].selected = true;
         if(place.prevTarget == null) {
             e.currentTarget.className="list-group-item active";
             place.prevTarget = e.currentTarget;
         } else if(place.prevTarget == e.currentTarget) {
             if(e.currentTarget.className == "list-group-item active") {
                  e.currentTarget.className = "list-group-item";
-               place.vault[index].selected = false;
+               cityServ.currCity.vault[index].selected = false;
             } else {
                  e.currentTarget.className = "list-group-item active";
-                place.vault[index].selected = true;
+                cityServ.currCity.vault[index].selected = true;
             }
         }
         else {
@@ -328,43 +328,48 @@ place.selectVaultItems=function(e,index){
 };
 place.pushInPocket=function()
 {
-  for(var i=0;i< place.vault.length;i++)
+  for(var i=0;i< cityServ.currCity.vault.length;i++)
   {
-    if(place.vault[i].selected == true)
+    if(cityServ.currCity.vault[i].selected == true)
     {
 
-      var temp=parseInt(window.prompt("You want to push "+place.vault[i].name+" into market from vault.\n Enter quantity you want to push "));
-      if( (temp <= place.vault[i].qty) && (temp >0) && (! isNaN(temp)))
+      var temp=parseInt(window.prompt("You want to push "+cityServ.currCity.vault[i].name+" into market from vault.\n Enter quantity you want to push "));
+      if( (temp <= cityServ.currCity.vault[i].qty) && (temp >0) && (! isNaN(temp)))
       {
-          var flag=check(i,whs.whdrugs,place.vault);
+          var flag=check(i,whs.whdrugs,cityServ.currCity.vault);
           if(flag == whs.whdrugs.length)
           { 
-            if(temp < place.vault[i].qty)
+            if(temp < cityServ.currCity.vault[i].qty)
             {
-               whs.whdrugs.push({name:place.vault[i].name,price:place.vault[i].price,qty:temp,selected:false});
-               place.vault[i].qty-=temp;
+               whs.whdrugs.push({name:cityServ.currCity.vault[i].name,price:cityServ.currCity.vault[i].price,qty:temp,selected:false});
+               cityServ.currCity.vault[i].qty-=temp;
             }
-            else if(temp == place.vault[i].qty)
+            else if(temp == cityServ.currCity.vault[i].qty)
             {
-               whs.whdrugs.push({name:place.vault[i].name,price:place.vault[i].price,qty:temp,selected:false});
-               place.vault.splice(i,1);          
+               whs.whdrugs.push({name:cityServ.currCity.vault[i].name,price:cityServ.currCity.vault[i].price,qty:temp,selected:false});
+               cityServ.currCity.vault.splice(i,1);          
             }
           }
           else
           {
              
-            if(temp < place.vault[i].qty)
+            if(temp < cityServ.currCity.vault[i].qty)
             {
                whs.whdrugs[flag].qty+=temp;
-               place.vault[i].qty-=temp;
+               cityServ.currCity.vault[i].qty-=temp;
             }
-            else if(temp == place.vault[i].qty)
+            else if(temp == cityServ.currCity.vault[i].qty)
             {
               whs.whdrugs[flag].qty+=temp;
-              place.vault.splice(i,1);          
+              cityServ.currCity.vault.splice(i,1);          
             }
-          }  
+          }
+           cityServ.cityVaultsInfo();  
       }
+      else
+      {
+        window.alert("enter value in specifed range");
+      } 
     }
   }
 };
