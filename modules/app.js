@@ -45,9 +45,11 @@ drugLord.controller('gameController',['$scope','cityService','playerService','ac
 	$scope.whdrugs = ware.whdrugs;
 	$scope.selectedDrugWareHouse = ware.selectedDrugWareHouse;
 
-	$scope.flyAway = function() {
+	$scope.getCityNames = function() {
 		$scope.destinations = cityServ.getCityNames();
 	};
+
+	$scope.stayHere = tomm.stayHere;
 
 	$scope.flyToCity = tomm.flyAway;
 
@@ -56,6 +58,7 @@ drugLord.controller('gameController',['$scope','cityService','playerService','ac
 	},function(newValue){
 		if($scope.start) {
 			$scope.setupPlayer();
+			$scope.setupCityNMarket();
 		}
 	});
 

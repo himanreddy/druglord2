@@ -31,7 +31,7 @@ drugLord.service('cityService',['drugService',function(dcs){
 		for(var i =0, n = scope.cityObjs.length; i < n; i++) {
 			if (scope.cityObjs[i].name == cityName) {
 				scope.currCity = scope.cityObjs[i];
-				scope.cityObjs[i].isHere = true;
+				scope.currCity.isHere = true;
 				continue;
 			};
 			scope.cityObjs[i].isHere = false;
