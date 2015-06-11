@@ -252,17 +252,17 @@ place.pushInvault=function(){
       var temp=parseInt(window.prompt("You want to put "+whs.whdrugs[i].name+" into vault.\n You have avilable quantity is "+whs.whdrugs[i].qty+"\n Enter the quantity you want to put inside vault"));
       if((temp <= whs.whdrugs[i].qty) && (temp > 0) && (!isNaN(temp)))
       {
-         var flag=check(i,cityServ.currCity.vault,whs.whdrugs);
-         if(flag == cityServ.currCity.vault.length)
+         var flag=check(i,cityServ.getCityVault(cityServ.currCity.name).vault,whs.whdrugs);
+         if(flag == cityServ.getCityVault(cityServ.currCity.name).vault.length)
          { 
             if(temp < whs.whdrugs[i].qty)
             {
-               cityServ.currCity.vault.push({name:whs.whdrugs[i].name,price:whs.whdrugs[i].price,qty:temp,selected:false});
+               cityServ.getCityVault(cityServ.currCity.name).vault.push({name:whs.whdrugs[i].name,price:whs.whdrugs[i].price,qty:temp,selected:false});
                whs.whdrugs[i].qty-=temp;
             }
             else if(temp == whs.whdrugs[i].qty)
             {
-               cityServ.currCity.vault.push({name:whs.whdrugs[i].name,price:whs.whdrugs[i].price,qty:temp,selected:false});
+               cityServ.getCityVault(cityServ.currCity.name).vault.push({name:whs.whdrugs[i].name,price:whs.whdrugs[i].price,qty:temp,selected:false});
                whs.whdrugs.splice(i,1);          
             }
           }
@@ -271,16 +271,15 @@ place.pushInvault=function(){
              
              if(temp < whs.whdrugs[i].qty)
             {
-               cityServ.currCity.vault[flag].qty+=temp;
+               cityServ.getCityVault(cityServ.currCity.name).vault[flag].qty+=temp;
                whs.whdrugs[i].qty-=temp;
             }
             else if(temp == whs.whdrugs[i].qty)
             {
-              cityServ.currCity.vault[flag].qty+=temp;
+              cityServ.getCityVault(cityServ.currCity.name).vault[flag].qty+=temp;
                whs.whdrugs.splice(i,1);          
             }
           }
-          cityServ.cityVaultsInfo();    
       }
       else
       {
@@ -304,20 +303,20 @@ place.pushInvault=function(){
   return flag;
 }
 place.selectVaultItems=function(e,index){
-    for(var i=0; i < cityServ.currCity.vault.length; i++) {
-            cityServ.currCity.vault[i].selected = false;
+    for(var i=0; i < cityServ.getCityVault(cityServ.currCity.name).vault.length; i++) {
+            cityServ.getCityVault(cityServ.currCity.name).vault[i].selected = false;
         }
-       cityServ.currCity.vault[index].selected = true;
+       cityServ.getCityVault(cityServ.currCity.name).vault[index].selected = true;
         if(place.prevTarget == null) {
             e.currentTarget.className="list-group-item active";
             place.prevTarget = e.currentTarget;
         } else if(place.prevTarget == e.currentTarget) {
             if(e.currentTarget.className == "list-group-item active") {
                  e.currentTarget.className = "list-group-item";
-               cityServ.currCity.vault[index].selected = false;
+               cityServ.getCityVault(cityServ.currCity.name).vault[index].selected = false;
             } else {
                  e.currentTarget.className = "list-group-item active";
-                cityServ.currCity.vault[index].selected = true;
+                cityServ.getCityVault(cityServ.currCity.name).vault[index].selected = true;
             }
         }
         else {
@@ -328,43 +327,42 @@ place.selectVaultItems=function(e,index){
 };
 place.pushInPocket=function()
 {
-  for(var i=0;i< cityServ.currCity.vault.length;i++)
+  for(var i=0;i< cityServ.getCityVault(cityServ.currCity.name).vault.length;i++)
   {
-    if(cityServ.currCity.vault[i].selected == true)
+    if(cityServ.getCityVault(cityServ.currCity.name).vault[i].selected == true)
     {
 
       var temp=parseInt(window.prompt("You want to push "+cityServ.currCity.vault[i].name+" into market from vault.\n Enter quantity you want to push "));
-      if( (temp <= cityServ.currCity.vault[i].qty) && (temp >0) && (! isNaN(temp)))
+      if( (temp <= cityServ.getCityVault(cityServ.currCity.name).vault[i].qty) && (temp >0) && (! isNaN(temp)))
       {
-          var flag=check(i,whs.whdrugs,cityServ.currCity.vault);
+          var flag=check(i,whs.whdrugs,cityServ.getCityVault(cityServ.currCity.name).vault);
           if(flag == whs.whdrugs.length)
           { 
-            if(temp < cityServ.currCity.vault[i].qty)
+            if(temp < cityServ.getCityVault(cityServ.currCity.name).vault[i].qty)
             {
-               whs.whdrugs.push({name:cityServ.currCity.vault[i].name,price:cityServ.currCity.vault[i].price,qty:temp,selected:false});
+               whs.whdrugs.push({name:cityServ.getCityVault(cityServ.currCity.name).vault[i].name,price:cityServ.getCityVault(cityServ.getCityVault(cityServ.currCity.name).name).vault[i].price,qty:temp,selected:false});
                cityServ.currCity.vault[i].qty-=temp;
             }
-            else if(temp == cityServ.currCity.vault[i].qty)
+            else if(temp == cityServ.getCityVault(cityServ.currCity.name).vault[i].qty)
             {
-               whs.whdrugs.push({name:cityServ.currCity.vault[i].name,price:cityServ.currCity.vault[i].price,qty:temp,selected:false});
-               cityServ.currCity.vault.splice(i,1);          
+               whs.whdrugs.push({name:cityServ.getCityVault(cityServ.getCityVault(cityServ.currCity.name).name).vault[i].name,price:cityServ.getCityVault(cityServ.currCity.name).vault[i].price,qty:temp,selected:false});
+               cityServ.getCityVault(cityServ.currCity.name).vault.splice(i,1);          
             }
           }
           else
           {
              
-            if(temp < cityServ.currCity.vault[i].qty)
+            if(temp < cityServ.getCityVault(cityServ.currCity.name).vault[i].qty)
             {
                whs.whdrugs[flag].qty+=temp;
-               cityServ.currCity.vault[i].qty-=temp;
+               cityServ.getCityVault(cityServ.currCity.name).vault[i].qty-=temp;
             }
-            else if(temp == cityServ.currCity.vault[i].qty)
+            else if(temp == cityServ.getCityVault(cityServ.currCity.name).vault[i].qty)
             {
               whs.whdrugs[flag].qty+=temp;
-              cityServ.currCity.vault.splice(i,1);          
+              cityServ.getCityVault(cityServ.currCity.name).vault.splice(i,1);          
             }
           }
-           cityServ.cityVaultsInfo();  
       }
       else
       {

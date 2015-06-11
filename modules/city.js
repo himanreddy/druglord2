@@ -7,6 +7,7 @@ drugLord.service('cityService',['drugService',function(dcs){
 	scope.initCities = function() {
 		console.log("initcities");
 		scope.init();
+		scope.initVault();
 	};
 
 	scope.init = function() {
@@ -15,7 +16,7 @@ drugLord.service('cityService',['drugService',function(dcs){
 			scope.cityObjs.push(
 				{
 					name : scope.cities[i], 
-					vault : [], drugs : dcs.getDrugs(), 
+					drugs : dcs.getDrugs(), 
 					market : dcs.initMarket(), 
 					isHere : false
 				}
@@ -54,9 +55,24 @@ drugLord.service('cityService',['drugService',function(dcs){
 		return scope.cityObjs;
 	};
 
+	scope.initVault = function() {
+		scope.cityVault = [];
+		for(var i =0, n = scope.cities.length; i<n; i++) {
+			scope.cityVault.push({name:scope.cities[i],vault:[]});
+		}
+	};
+
+	scope.getCityVault = function(name) {
+		for(var i=0, n=scope.cityVault.length; i < n; i++) {
+			if(scope.cityVault[i].name == name) {
+				return scope.cityVault[i];
+			}
+		}
+	};
+
     scope.vaultInfo=[];
 	
-	scope.cityVaultsInfo =function(){
+	scope.cityVaultsInfo = function() {
 		console.log("inside cityVaultsInfo");
 		for(var i =0, n = scope.getCityObjs().length;i<n; i++) 
 		{
@@ -82,20 +98,19 @@ drugLord.service('cityService',['drugService',function(dcs){
 
 		}
 	};
-scope.check=function(i,obj1,obj2)
-{
-  var flag=0;
-  for( var j=0;j<obj1.length;j++)
-  {
-       console.log("inside check");
-    if( obj1[j].name == obj2[i].name )
-    {
-      break;
-    }
-    flag++;
-  }
-  return flag;
-};	
+	scope.check=function(i,obj1,obj2) {
+		var flag=0;
+		for( var j=0;j<obj1.length;j++)
+		{
+		   console.log("inside check");
+		if( obj1[j].name == obj2[i].name )
+		{
+		  break;
+		}
+		flag++;
+		}
+		return flag;
+	};			
 
 	scope.getVaultInfo = function(){
 		return scope.vaultInfo;
