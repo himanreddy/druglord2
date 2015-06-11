@@ -6,13 +6,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Drug Lord 2</title>
+    <title>Drug Lord</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="app.css">
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 <body  ng-controller="gameController">
   <!--[if lt IE 7]>
@@ -38,29 +38,26 @@
             <button class="btn btn-primary col-xs-5" ng-click="sellDrug()"> << Sell</button><br><br>
             <button class="btn btn-primary col-xs-5" ng-click="dumpDrug()">Dump</button>
             <div class="col-xs-2"></div>
-
             <div class="dropdown" style="display:inline;">
-             <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown"> Places
-            <span class="caret"> </span> </button>
-             <ul class="dropdown-menu " role="menu">
-                <li><a href="#" data-toggle="modal" data-target="#myModal" >Finances</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#myModal1">Shopping</a></li>
-                <li><a href="#">Hospital</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#myModal2">Vault   </a></li>
-                <li><a href="#">Shipping</a></li> 
-            </ul> 
+                   <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown"> Places
+                   <span class="caret"> </span> </button>
+                   <ul class="dropdown-menu">
+                     <li><a href="#" data-toggle="modal" data-target="#myModal" >Finances</a></li>
+                     <li><a href="#" data-toggle="modal" data-target="#myModal1">Shopping</a></li>
+                     <li><a href="#">Hospital</a></li>
+                     <li><a href="#" data-toggle="modal" data-target="#myModal2">Vault   </a></li>
+                   </ul> 
             </div><br><br>
-
              <div class="dropdown" style="display:inline;">
                  <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown"> Info
                 <span class="caret"> </span> </button>
-                 <ul class="dropdown-menu ">
-                    <li><a href="#">Vaults           </a></li>
-                    <li><a href="#">World drug price </a></li>
-                    <li><a href="#">World cities     </a></li>
-                    <li><a href="#">Shipping satus    </a></li> 
+                 <ul class="dropdown-menu">
+                    <li><a href="#" data-toggle="modal" data-target="#modal11">Vaults Info</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#modal12">World drug price </a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#modal13">World cities     </a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#modal14">History          </a></li>
                 </ul> 
-                </div>
+            </div>
         </div>
 
 
@@ -78,14 +75,15 @@
         
         <div class="tomorrow col-md-4">
             <h4 class="heading">Tomorrow</h4><hr>
-            <button class="btn btn-primary col-xs-5" ng-click="stayHere()">Stay Here</button>
+            <button class="btn btn-primary col-xs-5">Stay Here</button>
             <div class="col-xs-2"></div>
+
             <div class="dropdown" style="display:inline">
-             <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown" ng-click="getCityNames()"> Fly Away
-            <span class="caret"> </span> </button>
-             <ul class="dropdown-menu scrollable-menu" role="menu">
-                <li ng-click="flyToCity($event)" ng-repeat="dest in destinations"><a data-toggle="modal">{{dest}}</a></li> 
-            </ul> 
+               <button class="btn btn-primary col-xs-5 dropdown-toggle" data-toggle="dropdown" ng-click="getCityNames()"> Fly Away
+              <span class="caret"> </span> </button>
+               <ul class="dropdown-menu scrollable-menu" role="menu">
+                  <li ng-click="flyToCity($event)" ng-repeat="dest in destinations"><a data-toggle="modal">{{dest}}</a></li> 
+              </ul> 
             </div>
 
         </div>
@@ -119,11 +117,13 @@
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-4">Days</label>
+
                     <input class="form-control col-sm-8" type="text" placeholder={{playerDays+"/"+playerDaysLeft}} disabled>
-                </div>
+                </div> 
                 <div class="col-sm-6">
                     <label class="col-sm-4">City</label>
-                    <input class="form-control col-sm-8" type="text" placeholder={{playerCity}} disabled> 
+
+                    <input class="form-control col-sm-8" type="text" placeholder={{playerCity}} disabled>
                 </div>
             </div>
         </div>
@@ -136,8 +136,6 @@
         </div>
         
 
-
-        <!-- Finance Modal -->
      <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
             <div class="modal-content" id="mymodal_content">
               <div class="modal-dialog">
@@ -163,7 +161,7 @@
                            </div></br>
                            <div class="form-inline">
                                 <div class="control-group col-sm-8">  
-                                     <label  for="ammount"> <p class="text-info"> Ammount :&nbsp</p></label>
+                                     <label  for="ammount"> <p class="text-info"> Amount :&nbsp</p></label>
                                      <input type="text" class="form-control" id="ammount" type="text" >
                                 </div> 
                                 <div class="control-group col-sm-4">  
@@ -174,7 +172,7 @@
                                 <h4 align ="left">Loan</h4><hr>
                                 <div class="form-inline ">
                                     <div class="control-group ">
-                                       <label for="loan"> <p class="text-info">Loan Ammount :&nbsp</p> </label>
+                                       <label for="loan"> <p class="text-info">Loan Amount :&nbsp</p> </label>
                                        <input type="text"class="form-control" type="text" id="loan"placeholder={{playerDebt|currency}} disabled>
                                     </div></br>
                                 </div>  
@@ -182,15 +180,12 @@
                        </div></br>
                        
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="payLone()">Pay Lone</button>
+                        <button type="button" class="btn btn-primary" ng-click="payLone()">Pay Loan</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
           </div>
         </div>
       </div>
-
-
-      <!-- Shopping modal -->
       <div id="myModal1" class="modal fade" role="dialog">
          <div class="modal-dialog">
          <!-- Modal content-->
@@ -242,12 +237,10 @@
             </div>
          </div>
       </div>
-
-      <!-- Vault Modal -->
      <div id="myModal2" class="modal fade" role="dialog">
-         <div class="modal-dialog">
+         <div class="modal-dialog" style="height:400px;width:700px;">
          <!-- Modal content-->
-            <div class="modal-content" style={height:500px;width:700px} >
+            <div class="modal-content"  >
                  <div class="modal-header">
                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h4 class="modal-title">Vaults</h4>
@@ -255,34 +248,135 @@
                  <div class="modal-body">
                     <div class="container" id="vault_model">
                         <div class="col-sm-5" id="inPocket">
-                            tarun
+                           <h4 class="heading" id="vaulthHead"> Your pants Pocket&nbsp&nbsp{{pocketSize}}</h4>
+                            <ul class="list-group">
+                                <li ng-click="selectedDrugWareHouse($event,$index)" align="center" class="list-group-item" ng-if="start" ng-repeat="whdrug in whdrugs track by $index">
+                                      <span class="drug-name" align="center">{{whdrug.name}}</span> 
+                                      <span align="center" class="cost">{{whdrug.price | currency}}</span>
+                                      <span class="badge">{{whdrug.qty}}</span>
+                                </li>
+                            </ul>
                          </div>   
                          <div class="col-sm-2" id="vaultAction">
-                            tarun
+                           <h4 class="heading" style="background-color:#CACAB0;text-align:center;"> Move</h4>
+                           <button class="btn btn-info" ng-click="moveInVault()">Move in </button></br></br>
+                           <button class="btn btn-info" ng-click="pushInPocket()">Move out </button>    
                          </div> 
                          <div class="col-sm-5" id="inVault">
-                            tarun
+                            <h4 class="heading" style="background-color:#CACAB0;text-align:center;"> In the Vault</h4>
+                            <ul class="list-group">
+                               <li ng-click="selectVaultItems($event,$index)" align="center" class="list-group-item" ng-if="start" ng-repeat="vaults in vault track by $index">
+                                <span class="drug-name" align="center">{{vaults.name}}</span> 
+                                <span align="center" class="cost">{{vaults.price | currency}}</span>
+                                 <span class="badge">{{vaults.qty}}</span> 
+                               </li>
+                             </ul>  
                          </div> 
                     </div>
-                 </div>
+                 </div></br>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> 
                  </div>
             </div>        
          </div>
      </div>
-   
-    </div>
+     <!-- Vault Info -->
+     <div id="modal11" class="modal fade" role="dialog">
+         <div class="modal-dialog" style="height:400px;width:700px;">
+         <!-- Modal content-->
+            <div class="modal-content"  >
+                 <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h3 class="modal-title">Vault Info</h3>
+                 </div>
+                 <div class="modal-body">
+                    <div class="container" style="width: 700px; margin-left: -15px;">
+                        <div class="col-sm-5" id="vaultLocation">
+                            <h4 class="heading" style="background-color:#2142AB;text-align:center;text-color:#EBEBEB;">Vault Location</h4>
+                             <ul class="list-group">
+                               <li ng-click="showVaultItem($index)" align="center" class="list-group-item" ng-if="vaultInfo" ng-repeat="vaults in vaultInfo track by $index">
+                                <span class="cityName" align="center">{{vaults.name}}</span> 
+                               </li>
+                             </ul> 
+                        </div>
+                        <div class="col-sm-7" id="vaultContent">
+                            <h4 class="heading" style="background-color:#2142AB;text-align:center;text-color:#EBEBEB;">Vault Contents</h4>
+                             <ul class="list-group">
+                               <li  align="center" class="list-group-item" ng-if="start" ng-repeat="vaultdrug in vaultDrug track by $index">
+                                <span class="vaultDrug" align="center">{{vaultdrug.name}}</span>
+                                <span align="center" class="cost">{{vaultdrug.price | currency}}</span>
+                                 <span class="badge">{{vaultdrug.qty}}</span> 
+                               </li>
+                             </ul> 
+                        </div>
+                    </div>
+                 </div>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                 </div>
+            </div>
+         </div>
+     </div>
+     <div id="modal12" class="modal fade" role="dialog">
+         <div class="modal-dialog" style="height:400px;width:700px;">
+         <!-- Modal content-->
+            <div class="modal-content"  >
+                 <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h3 class="modal-title">World Drug Price</h3>
+                 </div>
+                 <div class="modal-body">
+                    <div class="container" style="width: 700px; margin-left: -15px;">
+                        <div class="col-sm-5" id="drugName">
+                            <h4 class="heading" style="background-color:#2142AB;text-align:center;text-color:#EBEBEB;">Drug</h4>
+                        </div>
+                        <div class="col-sm-7" id="drugCity">
+                            <h4 class="heading" style="background-color:#2142AB;text-align:center;text-color:#EBEBEB;">City List</h4>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                 </div>
+            </div>
+         </div>
+     </div>
+     <div id="modal13" class="modal fade" role="dialog">
+         <div class="modal-dialog" style="height:400px;width:700px;">
+         <!-- Modal content-->
+            <div class="modal-content">
+                 <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h3 class="modal-title">World Cities</h3>
+                 </div>
+                 <div class="modal-body">
+                    <div class="container" style="width: 700px; margin-left: -15px;">
+                        <div class="col-sm-5" id="cityName">
+                            <h4 class="heading" style="background-color:#2142AB;text-align:center;text-color:#EBEBEB;">City</h4>
+                        </div>
+                        <div class="col-sm-7" id="cityDrugs">
+                            <h4 class="heading" style="background-color:#2142AB;text-align:center;text-color:#EBEBEB;">Drug List</h4>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                 </div>
+            </div>
+         </div>
+     </div>
+
+</div>
 
     <!-- In production use:-->
     <script src="bower_components/angular/angular.js"></script>
     <script src="modules/app.js"></script>
     <script src="modules/city.js"></script>
-    <script src="modules/market.js"></script>
-    <script src="modules/player.js"></script>
-    <script src="modules/random.js"></script>
     <script src="modules/warehouse.js"></script>
+    <script src="modules/random.js"></script>
+    <script src="modules/market.js"></script>
     <script src="modules/action.js"></script>
+    <script src="modules/player.js"></script>
     <script src="modules/place.js"></script>
     <script src="modules/tomorrow.js"></script>
 </body>

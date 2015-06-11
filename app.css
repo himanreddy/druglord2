@@ -113,29 +113,58 @@ html, body {
 
 #inPocket
 {
-  background: blue;
   height: 275px;
   border: 1px black solid;
 }
 #vaultAction
 {
-  background: blue;
   height: 275px;
   border: 1px black solid;
 }
 #inVault
 {
-  background: blue;
   height: 275px;
   border: 1px black solid;
 }
 #vault_model
 {
-  height:600px;
   width:700px;
   margin-left: -12px;
 }
+<<<<<<< HEAD
+#vaulthHead{
+  background-color: #CACAB0;
+  text-align: center;
 
+}
+#vaultLocation{
+  height: 275px;
+  border: 1px blue solid;
+  border-right: none;
+}
+#vaultContent{
+  height: 275px;
+  border: 1px blue solid;
+}
+#drugName{
+  height: 275px;
+  border: 1px blue solid;
+  border-right: none;
+
+}
+#drugCity{
+  height: 275px;
+  border: 1px blue solid;
+}
+#cityName{
+   height: 275px;
+  border: 1px blue solid;
+  border-right: none;
+}
+#cityDrugs{
+    height: 275px;
+  border: 1px blue solid;
+}
 .scrollable-menu {
     height: auto;
     max-height: 190px;

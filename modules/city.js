@@ -54,6 +54,53 @@ drugLord.service('cityService',['drugService',function(dcs){
 		return scope.cityObjs;
 	};
 
+    scope.vaultInfo=[];
+	
+	scope.cityVaultsInfo =function(){
+		console.log("inside cityVaultsInfo");
+		for(var i =0, n = scope.getCityObjs().length;i<n; i++) 
+		{
+			if(scope.cityObjs[i].vault.length > 0) 
+			{
+				       if(!isNaN(scope.vaultsInfo))
+				       {
+				       	  var flag = scope.check(i,scope.valtsInfo,scope.cityObjs);
+				          if(flag == scope.valtsInfo.length)
+				         {
+				           scope.vaultInfo.push({name:scope.cityObjs[i].name,vault:scope.cityObjs[i].vault}); 
+				         }
+				         else
+				         {
+				       	   scope.vaultInfo.vault[flag].qty=scope.cityObjs[i].vault.qty;
+				         }
+				       }
+				       else
+				       {
+				       	  scope.vaultInfo.push({name:scope.cityObjs[i].name,vault:scope.cityObjs[i].vault});
+						}			
+			}
+
+		}
+	};
+scope.check=function(i,obj1,obj2)
+{
+  var flag=0;
+  for( var j=0;j<obj1.length;j++)
+  {
+       console.log("inside check");
+    if( obj1[j].name == obj2[i].name )
+    {
+      break;
+    }
+    flag++;
+  }
+  return flag;
+};	
+
+	scope.getVaultInfo = function(){
+		return scope.vaultInfo;
+	};
+
 	scope.prevTarget = null;
     scope.selectedDrug = function(e,index) {
         //first mark all selected value to false
@@ -86,4 +133,5 @@ drugLord.service('cityService',['drugService',function(dcs){
             scope.prevTarget = e.currentTarget;
         }
     };
+
 }]);
